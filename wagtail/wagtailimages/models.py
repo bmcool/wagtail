@@ -103,6 +103,9 @@ class AbstractImage(CollectionMember, index.Indexed, models.Model):
         if self.file_size is None:
             try:
                 self.file_size = self.file.size
+            except AttributeError:
+                # self.file is NoneType
+                return
             except OSError:
                 # File doesn't exist
                 return
